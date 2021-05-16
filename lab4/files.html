@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+
+<body>
+
+<div id="output_data">
+
+</div>
+
+</body>
+
+<script>
+    const getData = () => {
+        const output = document.getElementById("output_data");
+
+        const xhr = new XMLHttpRequest();
+        xhr.open("GET", "/files");
+        xhr.send();
+
+        xhr.onload = function () {
+            output.innerHTML = this.responseText;
+        }
+    }
+
+    window.onload = getData;
+</script>
+
+</html>

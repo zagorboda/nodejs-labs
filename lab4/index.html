@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8"><title>Title</title>
+</head>
+
+<body>
+    <h1>Server</h1>
+
+    <p><a href="/file">Get server files</a></p>
+    <br>
+
+    <p>Max value from string</p>
+    <label for="inputField">Enter string with space separated integers  :</label>
+    <input id="inputField">
+    <button id="inputSubmit">Enter</button>
+    <div id="inputResponse"></div>
+</body>
+
+<script>
+    // const axios = require('axios');
+
+    window.onload = function () {
+        const input = document.getElementById("inputField");
+        const btn = document.getElementById("inputSubmit");
+        const output = document.getElementById("inputResponse");
+
+        let getValue = function () {
+            let xhr = new XMLHttpRequest();
+            xhr.open("POST", '/maxvalue', true);
+            xhr.setRequestHeader('Content-Type', 'application/json');
+
+            xhr.send(JSON.stringify({
+                test: input.value,
+            }));
+            xhr.onload = function() {
+                let data = JSON.parse(this.responseText);
+                output.innerText = data;
+            };
+
+            // const params = {
+            //     input_value: input
+            // }
+            // const http = new XMLHttpRequest()
+            // http.open('POST', '/maxvalue')
+            // http.setRequestHeader('Content-type', 'application/json')
+            // http.send(JSON.stringify(params)) // Make sure to stringify
+            // http.onload = function() {
+            //     // Do whatever with response
+            //     alert(http.responseText)
+            // }
+
+            // console.log('HERE');
+            // const url = "/maxvalue";
+            // fetch(url, {
+            //     method : "POST",
+            //     body: JSON.stringify({input: input})
+            //     // body: new FormData(document.getElementById("inputform")),
+            //     // -- or --
+            //     // body : JSON.stringify({
+            //     // user : document.getElementById('user').value,
+            //     // ...
+            //     // })
+            // })
+        }
+        //     const xhr = new XMLHttpRequest();
+        //     xhr.open("POST", "/maxvalue");
+        //     xhr.onload = function () {
+        //         output.innerHTML = this.responseText;
+        //     }
+        //     xhr.onerror = function () {
+        //         console.log("Error");
+        //     }
+        //     xhr.send(JSON.stringify({
+        //         input_data: input.value
+        //     }));
+        //     // xhr.send({
+        //     //     input_data: input.value
+        //     // });
+        // };
+        btn.addEventListener("click", getValue);
+    };
+</script>
+</html>
